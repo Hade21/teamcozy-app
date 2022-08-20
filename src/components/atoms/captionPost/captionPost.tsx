@@ -6,9 +6,10 @@ import {
 } from "react-icons/ai";
 
 interface CaptionPostProps {
-  name: string;
+  name: string | undefined;
+  caption?: string;
 }
-const CaptionPost: React.FC<CaptionPostProps> = ({ name }) => {
+const CaptionPost: React.FC<CaptionPostProps> = ({ name, caption }) => {
   return (
     <div className="px-3 py-2">
       <div className="actions flex gap-3 text-2xl">
@@ -21,8 +22,7 @@ const CaptionPost: React.FC<CaptionPostProps> = ({ name }) => {
       </div>
       <div className="caption">
         <p className="text-base">
-          <span className="font-bold">{name}</span> Dieng Culuture Festival XIII
-          2022 "return of the light" 2-4 september 2022
+          <span className="font-bold">{name ? name : "Guest"}</span> {caption}
         </p>
       </div>
       <div className="comments mt-2">

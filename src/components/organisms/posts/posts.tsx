@@ -1,14 +1,24 @@
 import React from "react";
 import { Post } from "../../molecules";
+import { useGetPostsQuery } from "../../../services/post";
 
 const Posts: React.FC = () => {
+  const { error, data, isLoading } = useGetPostsQuery(undefined);
+
   return (
     <div className="flex flex-col gap-4">
-      <Post name="Ardito" image="" />
-      <Post name="Dwi" image="" />
-      <Post name="Jaka" image="" />
-      <Post name="Nita" image="" />
-      <Post name="Joni" image="" />
+      {data
+        ? data.map((post) => {
+            return (
+              <Post
+                name={post.creator}
+                image=""
+                caption={post.caption}
+                key={post._id}
+              />
+            );
+          })
+        : null}
     </div>
   );
 };

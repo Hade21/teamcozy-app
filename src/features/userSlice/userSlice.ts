@@ -47,5 +47,5 @@ const userSlice = createSlice({
 
 export const { setEmail, setUsername, setPassword, setCPassword } =
   userSlice.actions;
-export const userStore = (state: RootState) => state.user.value;
+export const userStore = (state: RootState) => state.user;
 export default userSlice.reducer;

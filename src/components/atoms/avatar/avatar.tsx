@@ -2,7 +2,7 @@ import React from "react";
 
 interface IProps {
   image?: string;
-  name: string;
+  name: string | undefined;
 }
 const Avatar: React.FC<IProps> = ({ image, name }) => {
   return (
@@ -12,7 +12,7 @@ const Avatar: React.FC<IProps> = ({ image, name }) => {
       ) : (
         <div className="h-10 w-10 rounded-full bg-slate-400"></div>
       )}
-      <p className="text-bold text-base">{name}</p>
+      <p className="text-bold text-base">{name ? name : "Guest"}</p>
     </div>
   );
 };
