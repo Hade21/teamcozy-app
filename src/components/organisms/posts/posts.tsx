@@ -4,6 +4,7 @@ import { useGetPostsQuery } from "../../../services/post";
 
 const Posts: React.FC = () => {
   const { error, data, isLoading } = useGetPostsQuery(undefined);
+  console.log(data);
 
   return (
     <div className="flex flex-col gap-4">

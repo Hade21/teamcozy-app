@@ -1,10 +1,10 @@
 import React from "react";
-import Home from "./pages/home";
+import Router from "./route/route";
 
 const App: React.FC = () => {
   return (
     <>
-      <Home />
+      <Router />
     </>
   );
 };
