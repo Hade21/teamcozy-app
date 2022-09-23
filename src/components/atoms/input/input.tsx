@@ -2,15 +2,22 @@ import React from "react";
 
 interface InputProps {
   id: string;
+  type: string;
   placeholder: string;
   value: string | undefined;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-const Input: React.FC<InputProps> = ({ id, placeholder, value, onChange }) => {
+const Input: React.FC<InputProps> = ({
+  id,
+  type,
+  placeholder,
+  value,
+  onChange,
+}) => {
   return (
-    <div className="border-prime-blue relative rounded-lg border-2 bg-white px-3 pt-6 pb-2">
+    <div className="border-prime-blue relative w-full rounded-lg border-2 bg-white px-3 pt-6 pb-2">
       <input
-        type="text"
+        type={type}
         name={id}
         id={id}
         value={value}

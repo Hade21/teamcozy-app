@@ -38,7 +38,22 @@ const FormUser: React.FC<IFormUser> = ({ form }) => {
     { isLoading: registerLoad, isError: registerError, data: registerData },
   ] = useRegisterMutation();
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleDisabled = (): boolean => {
+    if (form === "login") {
+      if (username && password) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      if (fullname && username && email && password && cpassword) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  };
+  const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
     if (e.currentTarget.id === "fullname") {
       dispatch(setFullname(e.currentTarget.value));
     } else if (e.currentTarget.id === "username") {
@@ -60,6 +75,10 @@ const FormUser: React.FC<IFormUser> = ({ form }) => {
       };
       await login(body);
       setCookie("token", loginData?.token);
+      console.log(loginError, loginData);
+      if (!loginError) {
+        navigate("/");
+      }
     } else {
       const body = {
         username,
@@ -71,23 +90,27 @@ const FormUser: React.FC<IFormUser> = ({ form }) => {
         phone,
       };
       await register(body);
-      navigate("/");
+      console.log(registerError);
+      if (!registerError) {
+        navigate("/login");
+      }
     }
   };
 
   return (
-    <div className="rounded-md border border-slate-500 py-12">
+    <div className="w-full rounded-md border border-slate-500 py-12">
       <h2 className="text-center text-3xl font-semibold">TeamCozy</h2>
-      <div className="wrapper mx-auto mt-12 w-5/6">
+      <div className="wrapper mx-auto mt-12 w-full">
         <form
-          className="flex flex-col items-center justify-center gap-y-4"
+          className="mx-auto flex w-5/6 flex-col items-center justify-center gap-y-4"
           onSubmit={handleSubmit}
         >
           {form === "register" ? (
-            <div className="wrapper">
+            <div className="wrapper flex w-full flex-col gap-y-4">
               <div className="fullname">
                 <Input
                   id="fullname"
+                  type="text"
                   placeholder="Fullname"
                   value={fullname}
                   onChange={handleChange}
@@ -96,6 +119,7 @@ const FormUser: React.FC<IFormUser> = ({ form }) => {
               <div className="email">
                 <Input
                   id="email"
+                  type="text"
                   placeholder="Email"
                   value={email}
                   onChange={handleChange}
@@ -103,26 +127,29 @@ const FormUser: React.FC<IFormUser> = ({ form }) => {
               </div>
             </div>
           ) : null}
-          <div className="username">
+          <div className="username w-full">
             <Input
               id="username"
+              type="text"
               placeholder="Username"
               value={username}
               onChange={handleChange}
             />
           </div>
-          <div className="password">
+          <div className="password w-full">
             <Input
               id="password"
+              type="password"
               placeholder="Password"
               value={password}
               onChange={handleChange}
             />
           </div>
           {form === "register" && (
-            <div className="confirmPassword">
+            <div className="confirmPassword w-full">
               <Input
                 id="confirmPassword"
+                type="password"
                 placeholder="Confirm Password"
                 value={cpassword}
                 onChange={handleChange}
@@ -130,7 +157,7 @@ const FormUser: React.FC<IFormUser> = ({ form }) => {
             </div>
           )}
           <div className="submit">
-            <Button model="rounded" type="submit">
+            <Button model="rounded" type="submit" disabled={handleDisabled()}>
               {form === "login" ? "Login" : "Register"}
             </Button>
           </div>
