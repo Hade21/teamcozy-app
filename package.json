@@ -11,6 +11,7 @@
     "@types/node": "^16.11.48",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "image-to-base64": "^2.2.0",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
@@ -46,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "@types/image-to-base64": "^2.1.0",
     "autoprefixer": "^10.4.8",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
